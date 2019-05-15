@@ -19,6 +19,24 @@
             </plugin>
         </plugins>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.any23</groupId>
+            <artifactId>apache-any23-csvutils</artifactId>
+            <version>2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.any23</groupId>
+            <artifactId>apache-any23-csvutils</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>4.6</version>
+        </dependency>
+    </dependencies>
 
 
 </project>

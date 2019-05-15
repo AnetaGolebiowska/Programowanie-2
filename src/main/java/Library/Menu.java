@@ -6,14 +6,8 @@ public class Menu {
     public static void main(String[] args) {
 
         Methods methods = new Methods();
-
-        System.out.println("Wybierz opcję: " +
-                "\n 1. Lista książek " +
-                "\n 2. Wyjdź " +
-                "\n 3. Dodaj książkę " +
-                "\n 4. Usuń książkę " +
-                "\n 5. Edycja roku wydania książki " +
-                "\n 6. Zapisz listę książek w csv");
+        Start start = new Start();
+        start.startMenu();
 
         Scanner scanner = new Scanner(System.in);
         int choice = Integer.parseInt(scanner.nextLine());
@@ -34,12 +28,13 @@ public class Menu {
                     methods.changeYear();
                     break;
                 case 6:
-                    System.out.println("Zapisz listę książek w csv");
+                    methods.saveAsCsv();
                     break;
                 default:
                     System.out.println("Błędny wybór, spróbuj jeszcze raz");
+                    start.startMenu();
+                    choice = Integer.parseInt(scanner.nextLine());
             }
-            break;
         }
         System.out.println("Koniec działania programu.");
     }
