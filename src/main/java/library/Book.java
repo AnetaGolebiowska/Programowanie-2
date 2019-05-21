@@ -1,13 +1,17 @@
-package Library;
+package library;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Book {
     private String title;
-    private int isbnNumner;
+    private int isbnNumber;
     private int year;
+//    List <> authors = new ArrayList<>();
 
     public Book(String title, int isbnNumner, int year) {
         this.title = title;
-        this.isbnNumner = isbnNumner;
+        this.isbnNumber = isbnNumber;
         this.year = year;
     }
 
@@ -19,12 +23,12 @@ public class Book {
         this.title = title;
     }
 
-    public int getIsbnNumner() {
-        return isbnNumner;
+    public int getIsbnNumber() {
+        return isbnNumber;
     }
 
-    public void setIsbnNumner(int isbnNumner) {
-        this.isbnNumner = isbnNumner;
+    public void setIsbnNumber(int isbnNumber) {
+        this.isbnNumber = isbnNumber;
     }
 
     public int getYear() {
@@ -39,7 +43,7 @@ public class Book {
     public String toString() {
         return "Book - " +
                 "title:" + title + '\'' +
-                ", isbnNumner:" + isbnNumner +
+                ", isbnNumner:" + isbnNumber +
                 ", year:" + year +
                 '.';
     }
