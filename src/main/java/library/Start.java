@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Start {
 
-    public void startMenu (){
+    public void startMenu() {
         System.out.println("Wybierz opcję: " +
                 "\n 1. Lista książek " +
                 "\n 2. Wyjdź " +
@@ -17,13 +17,16 @@ public class Start {
                 "\n 9. Wyświetl książki wydane po 2007 roku" +
                 "\n 10. Wyświetl wszystkie kategorie" +
                 "\n 11. Wyświetl wszystkich autorów" +
-                "\n 12. Usunięcie kategorii po identyfikatorze");
-
+                "\n 12. Usunięcie kategorii po identyfikatorze" +
+                "\n 16. Wyświetl wszystkie książki autora." +
+                "\n 17. Zapisz listę kategorii do pliku." +
+                "\n 18. Zapisz stan.");
     }
-    public void formatPrintBook(){
+
+    public void formatPrintBook() {
         System.out.println("Wybierz opcję wyświetlania: " +
                 "\n 13. tytuł, rok, ISBN" +
                 "\n 14. rok, tytuł, ISBN" +
-                "\n 15. ISBN, rok, tytuł" );
+                "\n 15. ISBN, rok, tytuł");
     }
 }

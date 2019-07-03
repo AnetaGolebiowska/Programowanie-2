@@ -80,23 +80,4 @@ public class BooksMethoth {
             }
         }
     }
-
-    public void saveAsCsv() {
-        List<String> listOfBokksToSave = new ArrayList<>();
-        listOfBokksToSave = DateBookHolder.getInstance().listOfBooks.stream()
-                .map(book -> (book.getTitle() + ";" + book.getIsbnNumber() + ";" + book.getYear()))
-                .collect(Collectors.toList());
-        String writeToFive = String.join("\n", listOfBokksToSave);
-        String csvFile = "src/Main/resources/newBooks.csv";
-        try {
-            FileWriter writer = new FileWriter(csvFile);
-            writer.append(writeToFive);
-            writer.flush();
-            writer.close();
-
-        } catch (
-                IOException e) {
-            System.out.println("Nie udało się zapisać pliku.");
-        }
-    }
 }

@@ -18,7 +18,7 @@ public class Book {
     private int isbnNumber;
     private int year;
     private Cover cover;
-    private List <Authors> listAuthorsId;
+    private List <Authors> listAuthors;
     private Categorie categorie;
 
 
@@ -30,7 +30,7 @@ public class Book {
                         ", isbn=" + isbnNumber +
                         ", year=" + year +
                         ", cover=" + cover +
-                        ", authorsList=" + listAuthorsId +
+                        ", authorsList=" + listAuthors +
                         ", categories=" + categorie;
     }
     @Override
@@ -42,13 +42,13 @@ public class Book {
                 year == book.year &&
                 Objects.equals(title, book.title) &&
                 Objects.equals(isbnNumber, book.isbnNumber) &&
-                Objects.equals(listAuthorsId, book.listAuthorsId) &&
+                Objects.equals(listAuthors, book.listAuthors) &&
                 Objects.equals(categorie, book.categorie) &&
                 cover == book.cover;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookId, title, isbnNumber, year, listAuthorsId, categorie, cover);
+        return Objects.hash(bookId, title, isbnNumber, year, listAuthors, categorie, cover);
     }
 }

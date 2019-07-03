@@ -12,6 +12,7 @@ public class Menu {
         FormatFunction printStrategy = new PrintFormatTitleYearIsbn();
         CategorieFunction categorieFunction = new CategorieFunction();
         AuthorFunction authorFunction = new AuthorFunction();
+        SaveBook saveBook = new SaveBook();
         Start start = new Start();
         start.startMenu();
 
@@ -42,7 +43,8 @@ public class Menu {
                             choice = scanner.nextInt();
                             break;
                         case 6:
-                            methods.saveAsCsv();
+                            saveBook.saveAsCsv(DateBookHolder.getInstance().listOfBooks,
+                                    "C:\\Users\\hp\\IdeaProjects\\Programowanie2\\src\\main\\resources\\newBooks.csv");
                             start.startMenu();
                             choice = scanner.nextInt();
                             break;
@@ -94,6 +96,13 @@ public class Menu {
                             start.startMenu();
                             choice = scanner.nextInt();
                             break;
+                        case 16:
+                            authorFunction.findBookForAuthorName();
+                            start.startMenu();
+                            choice = scanner.nextInt();
+                            break;
+                        case 17:
+
                         default:
                             System.out.println("Błędny wybór,róbuj jeszcze raz");
                             choice = scanner.nextInt();
