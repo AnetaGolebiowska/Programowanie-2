@@ -1,24 +1,25 @@
 package library;
 
-import org.apache.commons.csv.CSVUtils;
-
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BooksMethoth {
 
-    List<Book> listOfBooks = new ArrayList<Book>();
     Scanner scanner = new Scanner(System.in);
+    BookLoader bookLoader = new BookLoader();
 
     public void printBook() {
-        listOfBooks.forEach(System.out::println);
+        DateBookHolder.getInstance().listOfBooks.forEach(System.out::println);
+    }
+
+    public void loadAllFiles() {
+        bookLoader.fileLoadCategories(PathToCsvFile.categoriesPath);
+        bookLoader.fileLoadAuthors(PathToCsvFile.authorsPath);
+        bookLoader.loadBook(PathToCsvFile.booksPath, PathToCsvFile.authorsPath, PathToCsvFile.categoriesPath);
     }
 
     public void addBook() {
@@ -28,16 +29,38 @@ public class BooksMethoth {
         String newInbnNumber = scanner.nextLine();
         System.out.println("Podaj rok wydania książki: ");
         String newYear = scanner.nextLine();
-        Book newBook = new Book(newTitle, Integer.valueOf(newInbnNumber), Integer.valueOf(newYear));
-        listOfBooks.add(newBook);
+        System.out.println("Podaj typ okładki twarda - T, miękka - M: ");
+        String coverType = scanner.nextLine();
+        CoverChechinkg.checkCoverType(coverType);
+        System.out.println("Podaj imię i nazwisko autora: ");
+        String newAuthorsName = scanner.nextLine();
+        System.out.println("Podaj wiek autora: ");
+        String newAuthorsAge = scanner.nextLine();
+        NumberChecking.checkIfIsNumber(newAuthorsAge);
+        AuthorFunction.addAuthors(newAuthorsName, Integer.valueOf(newAuthorsAge));
+        System.out.println("Podaj kategorię książki: ");
+        String newCategorie = scanner.nextLine();
+        System.out.println("Podaj proprytet wyświetlania: ");
+        String newPriorytate = scanner.nextLine();
+        NumberChecking.checkIfIsNumber(newPriorytate);
+        CategorieFunction.addCategorie(newCategorie, Integer.valueOf(newPriorytate));
+        Book newBook = new Book(
+                CreateID.cerateBookId(),
+                newTitle,
+                Integer.valueOf(newInbnNumber),
+                Integer.valueOf(newYear),
+                Cover.valueOf(coverType),
+                AuthorFunction.backListOfAuthors(newAuthorsName, Integer.valueOf(newAuthorsAge)),
+                CategorieFunction.backCategorie(newCategorie));                ;
+        DateBookHolder.getInstance().listOfBooks.add(newBook);
     }
 
     public void removeBook() {
         System.out.println("Podaj tytuł książki");
         String removeTitle = scanner.nextLine().toLowerCase();
-        for (int i = 0; i < listOfBooks.size(); i++) {
-            if (listOfBooks.get(i).getTitle().equalsIgnoreCase(removeTitle)) {
-                listOfBooks.remove(i);
+        for (int i = 0; i < DateBookHolder.getInstance().listOfBooks.size(); i++) {
+            if (DateBookHolder.getInstance().listOfBooks.get(i).getTitle().equalsIgnoreCase(removeTitle)) {
+                DateBookHolder.getInstance().listOfBooks.remove(i);
             } else {
                 System.out.println("Książka o podanym tytule nie istnieje");
             }
@@ -47,11 +70,11 @@ public class BooksMethoth {
     public void changeYear() {
         System.out.println("Podaj tytuł książki");
         String changeYear = scanner.nextLine().toLowerCase();
-        for (int i = 0; i < listOfBooks.size(); i++) {
-            if (listOfBooks.get(i).getTitle().toLowerCase().equals(changeYear)) {
+        for (int i = 0; i < DateBookHolder.getInstance().listOfBooks.size(); i++) {
+            if (DateBookHolder.getInstance().listOfBooks.get(i).getTitle().toLowerCase().equals(changeYear)) {
                 System.out.println("Podaj prawidłowy rok");
                 int correctYear = scanner.nextInt();
-                listOfBooks.get(i).setYear(correctYear);
+                DateBookHolder.getInstance().listOfBooks.get(i).setYear(correctYear);
             } else {
                 System.out.println("Książka o podanym tytule nie istnieje");
             }
@@ -60,7 +83,7 @@ public class BooksMethoth {
 
     public void saveAsCsv() {
         List<String> listOfBokksToSave = new ArrayList<>();
-        listOfBokksToSave = listOfBooks.stream()
+        listOfBokksToSave = DateBookHolder.getInstance().listOfBooks.stream()
                 .map(book -> (book.getTitle() + ";" + book.getIsbnNumber() + ";" + book.getYear()))
                 .collect(Collectors.toList());
         String writeToFive = String.join("\n", listOfBokksToSave);

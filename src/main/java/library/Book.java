@@ -1,71 +1,54 @@
 package library;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
+import java.util.Objects;
+
+@Getter
+@Setter
+@AllArgsConstructor
 
 public class Book {
 
-    private List<Authors> authorsList;
-    private Categorie categorie;
+    private int bookId;
     private String title;
     private int isbnNumber;
     private int year;
-
-    public Book(List<Authors> authorsList, Categorie categorie, String title, int isbnNumner, int year) {
-        this.title = title;
-        this.isbnNumber = isbnNumber;
-        this.year = year;
-        this.authorsList = authorsList;
-        this.categorie = categorie;
-    }
-
-    public List<Authors> getAuthorsList() {
-        return authorsList;
-    }
-
-    public void setAuthorsList(List<Authors> authorsList) {
-        this.authorsList = authorsList;
-    }
-    public Categorie getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-
-    public int getIsbnNumber() {
-        return isbnNumber;
-    }
-
-    public void setIsbnNumber(int isbnNumber) {
-        this.isbnNumber = isbnNumber;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
+    private Cover cover;
+    private List <Authors> listAuthorsId;
+    private Categorie categorie;
 
 
     @Override
     public String toString() {
-        return "Book - " +
-                "title:" + title + '\'' +
-                ", isbnNumner:" + isbnNumber +
-                ", year:" + year +
-                '.';
+        return
+                "id=" + bookId +
+                        ", title=" + title +
+                        ", isbn=" + isbnNumber +
+                        ", year=" + year +
+                        ", cover=" + cover +
+                        ", authorsList=" + listAuthorsId +
+                        ", categories=" + categorie;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return bookId == book.bookId &&
+                year == book.year &&
+                Objects.equals(title, book.title) &&
+                Objects.equals(isbnNumber, book.isbnNumber) &&
+                Objects.equals(listAuthorsId, book.listAuthorsId) &&
+                Objects.equals(categorie, book.categorie) &&
+                cover == book.cover;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bookId, title, isbnNumber, year, listAuthorsId, categorie, cover);
     }
 }

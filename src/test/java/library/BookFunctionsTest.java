@@ -1,5 +1,6 @@
 package library;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +17,7 @@ public class BookFunctionsTest {
     Book book2 = new Book("Muminki", 52630, 2011);
     Book book3 = new Book("Miś Koralgol", 8852, 1979);
     Book book4 = new Book("Calineczka", 89893, 1932);
-    Book book5 = new Book("Swinka Pepa", 88967, 1999);
+    Book book5 = new Book( "Swinka Pepa", 88967, 1999);
     Book book6 = new Book("Timon i Pumba", 63521, 2001);
 
     List<Book> testbooks = new ArrayList<>();
@@ -77,6 +78,11 @@ public class BookFunctionsTest {
     @Test
     public void schouldShowLastElement() {
         Assert.assertEquals(testbooks.get(1), bookFunctions.lastBook(testbooks));
+    }
+
+    @Test
+    public void schouldNotShowLastElements() {
+        Assertions.assertThat(testbooks).containsExactlyInAnyOrder(testbooks.get(4), testbooks.get(5));
     }
 
     @Test
@@ -325,6 +331,7 @@ public class BookFunctionsTest {
 
         Assert.assertEquals(bookMap, bookFunctions.beforeAndAfrter2009(testbooks));
     }
+
     @Test
     public void schouldShowMapBeforeAddAfter20092() {
         List<Book> testList1 = new ArrayList<>();

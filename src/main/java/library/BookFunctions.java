@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 public class BookFunctions {
 
-    List<Book> newListOfBooks = new ArrayList<Book>();
     Scanner scanner = new Scanner(System.in);
     BookYearComparator bookYearComparator = new BookYearComparator();
 
@@ -65,10 +64,15 @@ public class BookFunctions {
     }
 
     //    4. Zwróć najpóźniej wydana książkę
+//    public Book lastBook(List<Book> listOfBooks) {
+//        return listOfBooks.stream()
+//                .sorted(Comparator.comparing(Book::getYear))
+//                .reduce((first, second) -> second)
+//                .get();
+//    }
     public Book lastBook(List<Book> listOfBooks) {
         return listOfBooks.stream()
-                .sorted(Comparator.comparing(Book::getYear))
-                .reduce((first, second) -> second)
+                .max(Comparator.comparing(Book::getYear))
                 .get();
     }
 
@@ -94,11 +98,14 @@ public class BookFunctions {
 //   }
 
     //    5. Zwróć sumę lat wydania wszystkich książek.
+//    public int sumYear(List<Book> listOfBooks) {
+//        Integer yearSum = listOfBooks.stream()
+//                .map(book -> book.getYear())
+//                .collect(Collectors.summingInt(Integer::intValue));
+//        return yearSum;
+//    }
     public int sumYear(List<Book> listOfBooks) {
-        Integer yearSum = listOfBooks.stream()
-                .map(book -> book.getYear())
-                .collect(Collectors.summingInt(Integer::intValue));
-        return yearSum;
+        return listOfBooks.stream().mapToInt(book -> book.getYear()).sum();
     }
 
     public int sumYear2(List<Book> listOfBooks) {
@@ -133,7 +140,7 @@ public class BookFunctions {
     //    7. Zwróć informacje o tym czy wszystkie książki w naszym katalogu są wydane po 2000 roku.
     public boolean isEveryBookAfter2000(List<Book> listOfBooks) {
         return listOfBooks.stream()
-                .noneMatch(book -> book.getYear() > 2000);
+                .allMatch(book -> book.getYear() > 2000);
     }
 
     public boolean isEveryBookAfter20002(List<Book> listOfBooks) {
@@ -145,12 +152,16 @@ public class BookFunctions {
     }
 
     //    8. Zwróć średni rok wydania książki w naszym katalogu.
+//    public int averageYear(List<Book> listOfBooks) {
+//        Integer yearSum = listOfBooks.stream()
+//                .map(book -> book.getYear())
+//                .collect(Collectors.summingInt(Integer::intValue));
+//        int yearAvarage = yearSum / listOfBooks.size();
+//        return yearAvarage;
+//    }
     public int averageYear(List<Book> listOfBooks) {
-        Integer yearSum = listOfBooks.stream()
-                .map(book -> book.getYear())
-                .collect(Collectors.summingInt(Integer::intValue));
-        int yearAvarage = yearSum / listOfBooks.size();
-        return yearAvarage;
+        String yearSum = listOfBooks.stream().mapToInt(book -> book.getYear()).average().toString();
+        return Integer.valueOf(yearSum);
     }
 
     public int averageYear2(List<Book> listOfBooks) {
@@ -161,7 +172,6 @@ public class BookFunctions {
         }
         yearAvarage = yearSum / listOfBooks.size();
         return yearAvarage;
-
     }
 
     //    9. Zwróć informacje o tym czy jakakolwiek książka w naszym katalogu jest wydana przed  2003 rokiem.
@@ -256,7 +266,8 @@ public class BookFunctions {
     }
 
     public List<Book> startedTillOldest2(List<Book> listOfBooks) {
-        Collections.sort(listOfBooks, Comparator.comparing(Book::getYear));
+    listOfBooks.sort(Comparator.comparing(Book::getYear));
+//    Collections.sort(listOfBooks, Comparator.comparing(Book::getYear));
         return listOfBooks;
     }
 
